@@ -1,29 +1,25 @@
 name: Matrix build
+
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    build:
-        runs-on: ${{matrix.os}}
-        strategy:
-            matrix:
-                os: [ubuntu-latest,windows-latest]
-                node: [18,20]
-        steps:
-            - uses: actions/checkout@v4
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 20]
 
-            - name: setup Node ${{matrix.node}}
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{matrix.node}}
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Print environment
-            run: |
-              node -v 
-              echo "OS: $RUNNER_OS"
+      - name: Setup Node ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
 
-           
-        
-
-                
-
+      - name: Print environment
+        run: |
+          node -v 
+          echo "OS: $RUNNER_OS"
